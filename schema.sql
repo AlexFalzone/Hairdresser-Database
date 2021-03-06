@@ -26,6 +26,16 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
+-- Table `mydb`.`personale`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`personale` (
+  `idPersonale` INT NOT NULL AUTO_INCREMENT,
+  `specialità` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`idPersonale`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
 -- Table `mydb`.`trattamento`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`trattamento` (
@@ -33,7 +43,14 @@ CREATE TABLE IF NOT EXISTS `mydb`.`trattamento` (
   `durata` TIME NOT NULL,
   `prezzo` SMALLINT NOT NULL,
   `descrizione` VARCHAR(45) NULL,
-  PRIMARY KEY (`idTrattamento`))
+  `personale_idPersonale` INT NOT NULL,
+  PRIMARY KEY (`idTrattamento`, `personale_idPersonale`),
+  INDEX `fk_trattamento_personale1_idx` (`personale_idPersonale` ASC) VISIBLE,
+  CONSTRAINT `fk_trattamento_personale1`
+    FOREIGN KEY (`personale_idPersonale`)
+    REFERENCES `mydb`.`personale` (`idPersonale`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
@@ -97,7 +114,14 @@ CREATE TABLE IF NOT EXISTS `mydb`.`negozio` (
   `idNegozio` INT NOT NULL AUTO_INCREMENT,
   `orari` TIME NOT NULL,
   `localita` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`idNegozio`))
+  `personale_idPersonale` INT NOT NULL,
+  PRIMARY KEY (`idNegozio`, `personale_idPersonale`),
+  INDEX `fk_negozio_personale1_idx` (`personale_idPersonale` ASC) VISIBLE,
+  CONSTRAINT `fk_negozio_personale1`
+    FOREIGN KEY (`personale_idPersonale`)
+    REFERENCES `mydb`.`personale` (`idPersonale`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
