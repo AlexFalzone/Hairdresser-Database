@@ -1,5 +1,3 @@
--- MySQL Workbench Forward Engineering
-
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
@@ -60,6 +58,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `mydb`.`clienti_has_trattamento` (
   `clienti_idCliente` INT NOT NULL,
   `trattamento_idTrattamento` INT NOT NULL,
+  `data` DATE NOT NULL,
   PRIMARY KEY (`clienti_idCliente`, `trattamento_idTrattamento`),
   INDEX `fk_clienti_has_trattamento_trattamento1_idx` (`trattamento_idTrattamento` ASC) VISIBLE,
   INDEX `fk_clienti_has_trattamento_clienti_idx` (`clienti_idCliente` ASC) VISIBLE,
@@ -241,8 +240,3 @@ CREATE TABLE IF NOT EXISTS `mydb`.`corsi_has_negozio` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
-
-
-SET SQL_MODE=@OLD_SQL_MODE;
-SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
-SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
