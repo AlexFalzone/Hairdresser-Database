@@ -16,6 +16,11 @@ CREATE TABLE IF NOT EXISTS `mydb`.`operazione_02` (`COUNT(*)` INT);
 CREATE TABLE IF NOT EXISTS `mydb`.`operazione_03` (`idPersonale` INT, `guadagni` INT);
 
 -- -----------------------------------------------------
+-- Placeholder table for view `mydb`.`operazione_04`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`operazione_04` (`COUNT(*)` INT);
+
+-- -----------------------------------------------------
 -- Placeholder table for view `mydb`.`operazione_05`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`operazione_05` (`COUNT(*)` INT);
@@ -86,6 +91,26 @@ CREATE  OR REPLACE VIEW operazione_03 AS
     HAVING guadagni >= 100
     ORDER BY guadagni ASC;
 
+    -- -----------------------------------------------------
+-- View `mydb`.`operazione_04`
+-- Contare quanti clienti, che si chiamano ‘Alessio’, 
+-- hanno prenotato un trattamento per il 20/02/2021
+-- -----------------------------------------------------
+
+DROP TABLE IF EXISTS `mydb`.`operazione_04`;
+USE `mydb`;
+CREATE  OR REPLACE VIEW operazione_03 AS
+SELECT 
+    count(*)
+FROM 
+    clienti c 
+        JOIN 
+    clienti_has_trattamento pt ON c.idCliente = pt.clienti_idCliente
+WHERE 
+    c.nome like 'Alessio%' 
+        AND 
+    pt.data = '20/02/2021'
+
 -- -----------------------------------------------------
 -- View `mydb`.`operazione_05`
 -- Trovare quante lezioni si sono svolte nel 2020
@@ -150,6 +175,8 @@ AS
 SELECT COUNT(n.personale_idPersonale)
 FROM negozio n
 WHERE n.idNegozio = 00 ;
+
+
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
