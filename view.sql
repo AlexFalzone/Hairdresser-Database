@@ -125,7 +125,7 @@ WHERE ( (l.giorno >= '01/01/2020') AND (l.giorno <= '31/12/2020') );
 
 -- -----------------------------------------------------
 -- View `mydb`.`operazione_06`
--- Contare quanti clienti nel 2019 hanno avuto un 
+-- Contare quanti clienti nel 2020 hanno avuto un 
 -- trattamento da tutto il personale
 -- -----------------------------------------------------
 
@@ -137,7 +137,7 @@ WHERE NOT EXISTS (  SELECT *
                     FROM personale p
                     WHERE NOT EXISTS (  SELECT *
                                         FROM clienti_has_trattamento pt JOIN trattamento t ON t.idTrattamento = pt.trattamento_idTrattamento
-                                        WHERE ( (pt.data >= '01/01/2019') AND (pt.data <= '31/12/2019') 
+                                        WHERE ( (pt.data >= '01/01/2020') AND (pt.data <= '31/12/2020') 
                                                 AND
                                                (pt.clienti_idCliente = c.idCliente)
                                                 AND
